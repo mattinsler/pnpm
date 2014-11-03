@@ -1,5 +1,7 @@
 ![logo](https://raw.githubusercontent.com/djblue/pnpm/master/public/pnpm.png)
 
+![travis](https://travis-ci.org/djblue/pnpm.svg)
+
 A simple to setup and use private npm registry service. This is intended
 for small teams in a corporate environment that want to experiment with
 node and use one of its best features for internal code, npm.
