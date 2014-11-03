@@ -1,0 +1,198 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background: #444;
+  color: #666;
+  font: 12pt Lucida Grande, sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: #006ea9;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+ul li {
+  margin-left: 20px;
+}
+
+ol li{
+  margin-left: 40px;
+}
+
+/* page styles */
+
+.border-top {
+  border-top: solid 6px #006ea9;
+  z-index: 10000;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0
+}
+
+.page {
+  line-height: 150%;
+  min-height: 100%;
+  background: #f4f4f2;
+}
+
+.page .page-inner {
+  border-top: solid 6px #006ea9; 
+  padding: 20px 0;
+}
+
+.page .description {
+  font-size: 18px;
+}
+
+.page .header {
+  border-bottom: solid 1px #666;
+}
+
+.page pre {
+  background-color: #fff;
+  font-family: monospace, serif;
+  white-space: pre-wrap;
+  padding: 5px;
+}
+
+.readme {
+  background-color: #fff;
+  padding: 10px;
+  /*line-height: 28px;*/
+}
+
+.readme h1 {
+  line-height: 32px;
+}
+
+.readme > * {
+  margin-bottom: 15px;
+}
+
+.readme * {
+  font-family: sans-serif;
+}
+
+.readme pre {
+  white-space: pre-wrap;
+  max-width: 100%;
+  overflow: auto;
+  font-family: Monaco, monospace;
+  background-color: #f9f9f8;
+  padding: 16px;
+}
+
+.page .container > * {
+  margin-bottom: 20px;
+}
+
+.page .container > *:last-child {
+  margin-bottom: 0px;
+}
+
+.metadata {
+  width: 100%;
+  margin: 1em 0;
+  border-collapse: collapse;
+  border-spacing: 0;
+  text-align: left;
+}
+
+.metadata tr {
+  border-top: solid 1px #ccc;
+}
+
+.metadata th,
+.metadata td {
+  padding: 0.5em 0;
+  vertical-align: baseline;
+}
+
+.em {
+  color: #006ea9;
+  font-style: italic;
+}
+
+.search-input {
+  height: 32px;
+  width: 260px;
+  font-size: 18px;
+  padding: 5px;
+  font-family: Georgia, serif;
+  border: solid 1px #ddd;
+  float: right;
+  margin-top: 4px;
+}
+
+.comma-seperated li {
+  margin: 0;
+  display: inline-block;
+}
+
+.comma-seperated li:after {
+  content: ',';
+}
+
+.comma-seperated li:last-child:after {
+  content: '';
+}
+
+.container {
+  padding: 0 10px;
+  width: 600px;
+  margin: 0 auto;
+}
+
+.footer {
+  color: #f4f4f2;
+  background: #444; 
+}
+
+.footer-inner {
+  border-top: 6px solid #333;
+  padding: 10px 0;
+}
+
+.page {
+  margin-bottom: -104px;
+}
+
+.page:after {
+  content: "";
+  display: block;
+}
+
+.footer, .page:after {
+  height: 104px;
+}
+
+/* disable scrollbars in chrome because thats what i like */
+::-webkit-scrollbar { width: 0 !important; }
+
+.love {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 11px;
+  color: rgba(1,1,1,0.2);
+}
+
+/* style helpful commands section */
+.cmd-description:first-letter {
+  text-transform: capitalize;
+}
+.cmd-description:after {
+  content: '.';
+}

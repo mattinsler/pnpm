@@ -1,0 +1,8 @@
+.git
+.gitignore
+srv.log
+test
+db
+.travis.yml
+config.json
+.DS_Store

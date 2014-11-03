@@ -1,0 +1,12 @@
+<div class="search">
+  <form method="GET" action="/">
+  <a href="/">
+    <img style="width: 200px" src="/pnpm.svg">
+  </a>
+  <% if (this.query) { %>
+  <input name="q" class="search-input" type="text" placeholder="Search Packages" value="<%= query %>" />
+  <% } else { %>
+  <input name="q" class="search-input" type="text" placeholder="Search Packages" />
+  <% } %>
+  </form>
+</div>

@@ -1,0 +1,63 @@
+{
+  "name": "pnpm",
+  "version": "0.0.1",
+  "description": "A simple private node package registry.",
+  "main": "app.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha ./test/npm ./test/unit",
+    "install": "cp -u config.json.template config.json",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/djblue/pnpm.git"
+  },
+  "keywords": [
+    "registry",
+    "private",
+    "node",
+    "simple"
+  ],
+  "author": "Abdullah Badahdah",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.6.2",
+    "ejs": "^1.0.0",
+    "express": "^4.8.2",
+    "highlight.js": "^8.1.0",
+    "level": "^0.18.0",
+    "marked": "^0.3.2",
+    "moment": "^2.8.1",
+    "morgan": "^1.2.2",
+    "nedb": "^0.10.7",
+    "request": "^2.40.0",
+    "semver": "^3.0.1"
+  },
+  "devDependencies": {
+    "chai": "^1.9.1",
+    "jshint": "^2.5.3",
+    "mocha": "^1.21.4",
+    "rimraf": "^2.2.8",
+    "supertest": "^0.13.0"
+  },
+  "engines": {
+    "node": "0.10.x"
+  },
+  "jshintConfig": {
+    "unused": true,
+    "undef": true,
+    "curly": true,
+    "indent": 2,
+    "maxdepth": 4,
+    "camelcase": true,
+    "eqeqeq": true,
+    "quotmark": "single",
+    "strict": true,
+    "laxcomma": true,
+    "node" : true,
+    "mocha": true
+  }
+}

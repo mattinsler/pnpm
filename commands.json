@@ -1,0 +1,118 @@
+[
+  {
+    "command": "npm install npm -g",
+    "description": "update npm to latest version"
+  },
+  {
+    "command": "npm search <package>",
+    "description": "search for npm packages by name"
+  },
+  {
+    "command": "npm view <package>",
+    "description": "view details of a npm package"
+  },
+  {
+    "command": "npm doc <package>",
+    "description": "view docs of a npm package"
+  },
+  {
+    "command": "npm test",
+    "description": "run package test suite"
+  },
+  {
+    "command": "npm install <package>",
+    "description": "install npm package by name locally"
+  },
+  {
+    "command": "npm install <package>@<version>",
+    "description": "install specific version of npm package"
+  },
+  {
+    "command": "npm install <package> -g",
+    "description": "install npm package by name globally"
+  },
+  {
+    "command": "npm install <package> --save",
+    "description": "install npm package and save it in package.json as dependency"
+  },
+  {
+    "command": "npm install <package> --save-dev",
+    "description": "install npm package and save it in package.json as devDependency"
+  },
+  {
+    "command": "npm uninstall <package>",
+    "description": "uninstall npm package by name locally"
+  },
+  {
+    "command": "npm uninstall <package> -g",
+    "description": "uninstall npm package by name globally"
+  },
+  {
+    "command": "npm ls",
+    "description": "view all currently installed npm packages"
+  },
+  {
+    "command": "npm link",
+    "description": "link an npm package locally"
+  },
+  {
+    "command": "npm init",
+    "description": "create a new npm package"
+  },
+  {
+    "command": "npm prune",
+    "description": "remove all unnecessary local npm packages"
+  },
+  {
+    "command": "npm adduser",
+    "description": "creating a new user account on npm"
+  },
+  {
+    "command": "npm publish",
+    "description": "publishing a npm package"
+  },
+  {
+    "command": "npm unpublish",
+    "description": "unpublishing a npm package"
+  },
+  {
+    "command": "npm owner add <owner> <package>",
+    "description": "add owner to published package"
+  },
+  {
+    "command": "npm owner rm <owner> <package>",
+    "description": "remove owner from published package"
+  },
+  {
+    "command": "npm owner ls <package>",
+    "description": "view all owners of a package"
+  }, 
+  {
+    "command": "npm config set save true",
+    "description": "set --save as a default for npm install"
+  },
+  {
+    "command": "npm config ls -l",
+    "description": "list all npm configuration flags"
+  },
+  {
+    "command": "npm edit <package>",
+    "description": "locally edit a dependency"
+  },
+  {
+    "command": "npm outdated",
+    "description": "list locally installed outdated packages"
+  },
+  {
+    "command": "npm shrinkwrap",
+    "description": "lock down dependency versions"
+  },
+  {
+    "command": "npm help",
+    "description": "show npm help"
+  },
+  {
+    "command": "npm help <command>",
+    "description": "show npm help for a specific command"
+  }
+]

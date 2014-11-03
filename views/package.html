@@ -1,0 +1,92 @@
+<% include header.html %>
+
+<div class="page">
+<div class="page-inner">
+<div class="container">
+
+<% include search.html %>
+
+<!--
+<pre><code><%- hljs.highlight('json', JSON.stringify(package, undefined, 2)).value %></code></pre>
+-->
+
+<div class="header">
+  <h1><%= package.name %></h1>
+</div>
+
+<p class="description"><%= package.description %></p>
+
+<pre><code>$ npm install <%= package._id %></code></pre>
+
+<%
+  var latest = package.versions[package['dist-tags'].latest]
+%>
+<table class="metadata">
+  <tr>
+    <th style="width: 140px">Version</th>
+    <td><b><%= package['dist-tags'].latest %></b> last updated <%= formatDate(package.time[package['dist-tags'].latest]) %></td>
+  </tr>
+  <tr>
+    <th>Keywords</th>
+    <% if (!!latest.keywords) { %>
+      <td>
+        <ul class="comma-seperated">
+        <% for (var i = 0; i < latest.keywords.length; i+= 1) { %>
+          <li><%= latest.keywords[i] %></li>
+        <% } %>
+        </ul>
+      </td>
+    <% } else { %>
+      <td>None</td>
+    <% } %>
+  </tr>
+  <tr>
+    <th>Dependencies</th>
+    <% if (!!latest.dependencies) { %>
+    <td>
+      <ul class="comma-seperated">
+      <% for (var key in latest.dependencies) { %>
+        <li><a href="/package/<%= key %>"><%= key %></a></li>
+      <% } %>
+      </ul>
+    </td>
+    <% } else { %>
+    <td>None</td>
+    <% } %>
+  </tr>
+  <tr>
+    <th>Dev Dep.</th>
+    <% if (!!latest.devDependencies) { %>
+    <td>
+      <ul class="comma-seperated">
+      <% for (var key in latest.devDependencies) { %>
+        <li><a href="/package/<%= key %>" ><%= key %></a></li>
+      <% } %>
+      </ul>
+    </td>
+    <% } else { %>
+    <td>None</td>
+    <% } %>
+  </tr>
+</table>
+
+<% if (!!package.readmeFilename) {%>
+
+<div>
+<%= package.readmeFilename %>
+<% if (!!package.readmeFilename && package.readmeFilename.match(/\.md$/)) { %>
+<div class="readme"><%- marked(package.readme) %></div>
+<% } else { %>
+<pre><%= package.readme %></pre>
+<% } %>
+</div>
+
+<% } else { %>
+<div>No README</div>
+<% } %>
+
+</div>
+</div>
+</div>
+
+<% include footer.html %>

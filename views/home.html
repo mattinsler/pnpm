@@ -1,0 +1,33 @@
+<% include header.html %>
+
+<div class="page">
+<div class="page-inner">
+<div class="container">
+
+<% include search.html %>
+
+<% var cmd = randomCommand() %>
+
+<!-- random helpful command -->
+<div class="cmd-description"><%= cmd.description %></div>
+<pre>$ <%= cmd.command %></pre>
+
+<p>Welcome to pnpm, the private npm registry. Below is a list of all
+available local packages.</p>
+
+<ul>
+<% for (var key in packages) { var package = packages[key] %>
+<li>
+  <p>
+    <a href="/package/<%= package.name %>"><%= package.name %></a>
+      (<%= package['dist-tags'].latest %>): <%= package.description %>
+  </p>
+</li>
+<% } %>
+</ul>
+
+</div>
+</div>
+</div>
+
+<% include footer.html %>
