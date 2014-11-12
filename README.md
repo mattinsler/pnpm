@@ -1,6 +1,9 @@
 ![logo](https://raw.githubusercontent.com/djblue/pnpm/master/public/pnpm.png)
 
-![travis](https://travis-ci.org/djblue/pnpm.svg)
+<a href="https://travis-ci.org/djblue/pnpm">
+  <img src="https://travis-ci.org/djblue/pnpm.svg?branch=master"/></a>
+
+[Demo](https://pnpm.herokuapp.com/).
 
 A simple to setup and use private npm registry service. This is intended
 for small teams in a corporate environment that want to experiment with
@@ -13,8 +16,6 @@ If you need to specify a version of python or msvs depending on your platform:
 
     npm install --python=python2
     npm install --msvs_version=2013
-
-[Demo](https://pnpm.herokuapp.com/).
 
 __NOTE__: since the demo site is using heroku and leveldb uses the file system,
 published packages will be removed whenever heroku resets the slug.
@@ -29,7 +30,9 @@ published packages will be removed whenever heroku resets the slug.
 - adduser (but no authorization)
 - search
 - publish
-- install
+- install (proxy/cache npmjs.org but priority given to locally published
+  packages)
+- unpublish (working on this)
 
 ## Web Frontend
 
