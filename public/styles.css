@@ -158,6 +158,7 @@ ol li{
 .footer {
   color: #f4f4f2;
   background: #444; 
+  position: relative;
 }
 
 .footer-inner {
