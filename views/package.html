@@ -6,15 +6,13 @@
 
 <% include search.html %>
 
-<!--
-<pre><code><%- hljs.highlight('json', JSON.stringify(package, undefined, 2)).value %></code></pre>
--->
-
 <div class="header">
   <h1><%= package.name %></h1>
 </div>
 
 <p class="description"><%= package.description %></p>
+
+<% if (package.versions !== undefined) { %>
 
 <pre><code>$ npm install <%= package._id %></code></pre>
 
@@ -69,6 +67,8 @@
     <% } %>
   </tr>
 </table>
+
+<% } %>
 
 <% if (!!package.readmeFilename) {%>
 

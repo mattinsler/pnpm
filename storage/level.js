@@ -29,9 +29,11 @@ exports.all = function (done) {
     delete doc._attachments;
 
     // replace all verions with the latest, and strip all metadata
-    var latest = doc['dist-tags'].latest;
-    doc.versions = {};
-    doc.versions[latest] = 'latest';
+    if (doc['dist-tags'] !== undefined) {
+      var latest = doc['dist-tags'].latest;
+      doc.versions = {};
+      doc.versions[latest] = 'latest';
+    }
 
     docs[data.key] = doc;
   });
@@ -97,4 +99,45 @@ exports.store = function (req, done) {
     
   });
 
+};
+
+exports.remove = function (req, done) {
+
+  db.packages.get(req.params.pkg, function (err, doc) {
+    // delegate delete to code from npm-registry-couchapp
+    // its kinda large, thank you guys for all the hard work!
+    var update = updates.delete(doc, req);
+
+    // catch conflicts
+    if (update[0]._id === '.error.') {
+      done(update[0]);
+
+    } else {
+
+      update[0]._rev = util.calculateRevision(update[0]._rev);
+
+      db.packages.put(req.params.pkg, update[0], function () {
+        done(null, update[1]);
+      });
+    }
+    
+  });
+};
+
+exports.removeTar = function (params, done) {
+  db.packages.get(params.pkg, function (err, doc) {
+    if (err) {
+      done(err);
+    } else {
+      delete doc._attachments[params.tar];
+      db.packages.put(params.pkg, doc, function (err) {
+        if (err) {
+          done(err);
+        } else {
+          done(null);
+          console.log(doc)
+        }
+      });
+    }
+  });
 };

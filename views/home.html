@@ -20,7 +20,11 @@ available local packages.</p>
 <li>
   <p>
     <a href="/package/<%= package.name %>"><%= package.name %></a>
+    <% if (package['dist-tags']) { %>
       (<%= package['dist-tags'].latest %>): <%= package.description %>
+    <% } else { %>
+      (unpublished)
+    <% } %>
   </p>
 </li>
 <% } %>

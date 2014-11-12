@@ -7,6 +7,7 @@ var express = require('express')
   , morgan = require('morgan')
   , path = require('path')
   , fs = require('fs')
+  , auth = require('basic-auth')
   , storage = require('./storage/level')
   ;
 
@@ -35,6 +36,12 @@ module.exports = function () {
         }
       };
     }
+  });
+
+  // parse basic auth headers
+  app.use(function (req, res, next) {
+    req.userCtx = auth(req);
+    next();
   });
 
   // all environments

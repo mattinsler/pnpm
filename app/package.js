@@ -46,15 +46,35 @@ exports.setup = function (app, storage) {
     });
   }, proxy.tarball);
 
-  app.param('rev', /^[0-9]+-[0-9a-fA-F]{32}$/);
-
-  app.put('/:pkg/:rev?/:revision?', function (req, res) {
+  var updatePackage = function (req, res) {
     storage.store(req, function (err) {
       if (err) {
         err.error = err.forbidden;
         res.status(400).json(err);
       } else {
-        res.status(201).end();
+        res.status(200).end();
+      }
+    });
+  };
+
+  app.put('/:pkg', updatePackage);
+  app.put('/:pkg/-rev/:revision', updatePackage);
+
+  app.delete('/:pkg/-rev/:revision', function (req, res) {
+    storage.remove(req, function (err) {
+      if (err) {
+        res.status(400).json(err);
+      } else {
+        res.status(200).end();
+      }
+    });
+  });
+
+  app.delete('/:pkg/-/:tar/-rev/:revision', function (req, res) {
+    storage.removeTar(req.params, function (err) {
+      if (err) {
+      } else {
+        res.status(200).end();
       }
     });
   });

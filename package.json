@@ -24,6 +24,7 @@
   "author": "Abdullah Badahdah",
   "license": "MIT",
   "dependencies": {
+    "basic-auth": "^1.0.0",
     "body-parser": "^1.6.2",
     "ejs": "^1.0.0",
     "express": "^4.8.2",
@@ -57,7 +58,7 @@
     "quotmark": "single",
     "strict": true,
     "laxcomma": true,
-    "node" : true,
+    "node": true,
     "mocha": true
   }
 }
