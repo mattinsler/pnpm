@@ -4,6 +4,7 @@ var hljs = require('highlight.js')
   , marked = require('marked')
   , moment = require('moment')
   , commands = require('../commands')
+  , packages = require('../lib/packages')
   ;
 
 marked.setOptions({
@@ -15,15 +16,15 @@ marked.setOptions({
   }
 });
 
-exports.setup = function (app, storage) {
+exports.setup = function (app) {
 
   app.get('/', function (req, res) {
-    storage.all(function (err, packages) {
+    packages.all(function (err, pkgs) {
       if (err) {
         res.json(err);
       } else {
         res.render('home', {
-          packages: packages,
+          packages: pkgs,
           query: req.query.q || '',
           randomCommand: function () {
             var index = Math.ceil(Math.random()*1000) % commands.length;
@@ -35,7 +36,7 @@ exports.setup = function (app, storage) {
   });
 
   app.get('/package/:name', function (req, res) {
-    storage.one(req.params.name, function (err, pkg) {
+    packages.one(req.params.name, function (err, pkg) {
       if (err) {
         res.status(404).render('404', { 
           name: req.params.name

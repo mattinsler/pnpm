@@ -3,12 +3,15 @@
 var request = require('request')
   , config = require('../config')
   , url = require('url')
+  , cache = require('../lib/cache')
   , NPM_REGISTRY = 'http://registry.npmjs.org'
   ;
 
 // set default proxy
 if (process.env.proxy || config.proxy) {
-  request.defaults({ 'proxy': process.env.proxy || config.proxy });
+  request.defaults({
+    proxy: process.env.proxy || config.proxy
+  });
 }
 
 var replaceTarballUrls = function (obj) {
@@ -19,16 +22,33 @@ var replaceTarballUrls = function (obj) {
 };
 
 exports.metadata = function (req, res) {
-  request(NPM_REGISTRY + req.path, function (err, proxy, body) {
-    body = JSON.parse(body);
-    // forward npmjs errors
-    if (!body.error) {
-      replaceTarballUrls(body);
+  cache.get(req.params.pkg, function (err, doc) {
+    if (err) {
+      request(NPM_REGISTRY + req.path, function (err, proxy, body) {
+        body = JSON.parse(body);
+        // forward npmjs errors
+        if (!body.error) {
+          replaceTarballUrls(body);
+          cache.put(body._id, body);
+        }
+        res.status(proxy.statusCode).set(proxy.headers).json(body);
+      });
+    } else {
+      req.log('getting ' + req.params.pkg + ' from cache...');
+      res.status(200).json(doc);
     }
-    res.status(proxy.statusCode).set(proxy.headers).json(body);
   });
 };
 
 exports.tarball = function (req, res) {
-  request(NPM_REGISTRY + req.path).pipe(res);
+  cache.get(req.params.tar, function (err, body) {
+    if (err) {
+      request(NPM_REGISTRY + req.path, { encoding: null }, function (err, resp, body) {
+        cache.put(req.params.tar, body);
+      }).pipe(res);
+    } else {
+      req.log('getting ' + req.params.tar + ' from cache...');
+      res.send(new Buffer(body, 'binary'));
+    }
+  });
 };

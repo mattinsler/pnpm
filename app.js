@@ -7,7 +7,6 @@ var express = require('express')
   , morgan = require('morgan')
   , path = require('path')
   , fs = require('fs')
-  , storage = require('./storage/level')
   ;
 
 module.exports = function () {
@@ -42,7 +41,20 @@ module.exports = function () {
   app.set('env', process.env.NODE_ENV || 'development');
 
   // setup server logging with morgan.js
-  app.use(morgan('tiny'));
+  app.use(function (req, res, next) {
+    var logs = [];
+    req.log = function (text) { logs.push(text); };
+    req.getLogs = function () { return logs; };
+    next();
+  });
+
+  morgan.token('logs', function (req) {
+    return req.getLogs().map(function (text) {
+      return '\n=> ' + text;
+    }).join('');
+  });
+
+  app.use(morgan(':method :url :status :response-time ms - :res[content-length] :logs'));
 
   // enable express app to parse json body (for rest api)
   app.use(bodyParser.json());
@@ -58,11 +70,12 @@ module.exports = function () {
     if (file.match(/\.js$/)) {
       var api = require('./app/' + file);
       if (typeof api.setup === 'function') {
-        console.log('#setup() in : ' + file);
-        api.setup(router, storage);
+        console.log('.setup() in : ' + file);
+        api.setup(router);
       }
     }
   });
+  console.log();
 
   return app;
 
