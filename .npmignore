@@ -6,3 +6,4 @@ db
 .travis.yml
 config.json
 .DS_Store
+screenshots
