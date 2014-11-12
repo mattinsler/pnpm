@@ -5,6 +5,7 @@ var hljs = require('highlight.js')
   , moment = require('moment')
   , commands = require('../commands')
   , packages = require('../lib/packages')
+  , meta = require('../package')
   ;
 
 marked.setOptions({
@@ -24,6 +25,7 @@ exports.setup = function (app) {
         res.json(err);
       } else {
         res.render('home', {
+          meta: meta,
           packages: pkgs,
           query: req.query.q || '',
           randomCommand: function () {
@@ -39,10 +41,12 @@ exports.setup = function (app) {
     packages.one(req.params.name, function (err, pkg) {
       if (err) {
         res.status(404).render('404', { 
+          meta: meta,
           name: req.params.name
         });
       } else {
         res.render('package', {
+          meta: meta,
           hljs: hljs,
           marked: marked,
           package: pkg,
