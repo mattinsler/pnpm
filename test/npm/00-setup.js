@@ -40,7 +40,7 @@ describe('NPM registry server', function () {
         expect(res.statusCode).to.equal(200);
         done();
       }).end();
-    }, 1500);
+    }, 1000);
 
   });
 });
