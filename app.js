@@ -11,8 +11,9 @@ var express = require('express')
 
 module.exports = function () {
 
-  var app = express(),
-      router = express.Router();
+  var app = express()
+    , router = express.Router()
+    ;
 
   app.disable('etag');
 

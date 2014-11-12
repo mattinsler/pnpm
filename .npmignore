@@ -1,5 +1,6 @@
 .git
 .gitignore
+.jshintignore
 srv.log
 test
 db
