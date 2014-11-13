@@ -4,14 +4,14 @@ var request = require('request')
   , config = require('../config')
   , url = require('url')
   , cache = require('../lib/cache')
+  , proxy = process.env.PROXY || config.proxy
   , NPM_REGISTRY = 'http://registry.npmjs.org'
   ;
 
-// set default proxy
-if (process.env.proxy || config.proxy) {
-  request.defaults({
-    proxy: process.env.proxy || config.proxy
-  });
+// set default proxy, if supplied
+if (proxy) {
+  console.log('> using proxy: "' + proxy + '"\n');
+  request = request.defaults({ proxy: proxy });
 }
 
 var replaceTarballUrls = function (obj) {
