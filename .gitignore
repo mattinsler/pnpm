@@ -6,4 +6,4 @@ srv.log
 .DS_Store
 Thumbs.db
 npmrc
-config.json
+config.js

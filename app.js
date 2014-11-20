@@ -38,7 +38,6 @@ module.exports = function () {
   });
 
   // all environments
-  app.set('port', process.env.PORT || 3000);
   app.set('env', process.env.NODE_ENV || 'development');
 
   // setup server logging with morgan.js
@@ -71,12 +70,11 @@ module.exports = function () {
     if (file.match(/\.js$/)) {
       var api = require('./app/' + file);
       if (typeof api.setup === 'function') {
-        console.log('.setup() in : ' + file);
+        console.log('> exports.setup() in app/' + file);
         api.setup(router);
       }
     }
   });
-  console.log();
 
   return app;
 

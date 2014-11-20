@@ -1,7 +1,7 @@
 'use strict';
 
 var proxy = require('./proxy')
-  , packages = require('../lib/packages')
+  , packages = require('../lib/package')
   ;
 
 exports.setup = function (app) {
@@ -50,7 +50,7 @@ exports.setup = function (app) {
   app.param('rev', /^[0-9]+-[0-9a-fA-F]{32}$/);
 
   app.put('/:pkg/:rev?/:revision?', function (req, res) {
-    packages.store(req, function (err) {
+    packages.put(req, function (err) {
       if (err) {
         err.error = err.forbidden;
         res.status(400).json(err);

@@ -2,27 +2,31 @@
 
 // the purpose of this file to to bring in the express application and
 // start a server instance
-var app = require('./app')();
+var fs = require('fs')
+  , ejs = require('ejs')
+  , logo = fs.readFileSync('./logo.txt', 'utf8')
+  , pkg = require('./package')
+  , config = require('./config')
+  , app = require('./app')()
+  ;
 
-// If all of the routes fail!!1
+// If all of the routes fail!!
 app.use(function(req, res){
     
-    res.status(404);
-
-    if (req.accepts('json')) {
-      // respond with json
-      res.json({
-        error:'not_found', 
-        reason:'document not found'
-      });
-    } else {
-      // default to plain-text.send()
-      res.type('txt').send('Not found');
-    }
+  res.status(404).json({
+    error:'not_found', 
+    reason:'document not found'
+  });
 
 });
 
-// start listening on the specified port or port 3000 (default)
-app.listen(app.get('port'), function () {
-    console.log('Express server listening on port ' + app.get('port'));
+// start listening on the config port
+app.listen(config('port'), function () {
+  if (config('logo')) {
+    console.log(ejs.render(logo, {
+      meta: pkg,
+      process: process,
+      config: config
+    }));
+  }
 });

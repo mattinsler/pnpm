@@ -4,7 +4,7 @@ var hljs = require('highlight.js')
   , marked = require('marked')
   , moment = require('moment')
   , commands = require('../commands')
-  , packages = require('../lib/packages')
+  , packages = require('../lib/package')
   , meta = require('../package')
   ;
 
