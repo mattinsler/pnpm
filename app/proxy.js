@@ -5,7 +5,7 @@ var request = require('request')
   , url = require('url')
   , cache = require('../lib/cache')
   , proxy = process.env.PROXY || config.proxy
-  , NPM_REGISTRY = 'http://registry.npmjs.org'
+  , REGISTRY = config('registry')
   ;
 
 // set default proxy, if supplied
@@ -17,14 +17,14 @@ if (proxy) {
 var replaceTarballUrls = function (obj) {
   Object.keys(obj.versions).forEach(function (v) {
     var parsed = url.parse(obj.versions[v].dist.tarball);
-    obj.versions[v].dist.tarball = url.resolve(process.env.DOMAIN || config.domain, parsed.path);
+    obj.versions[v].dist.tarball = url.resolve(process.env.DOMAIN || config('host'), parsed.path);
   });
 };
 
 exports.metadata = function (req, res) {
   cache.get(req.params.pkg, function (err, doc) {
     if (err) {
-      request(NPM_REGISTRY + req.path, function (err, proxy, body) {
+      request(REGISTRY + req.path, function (err, proxy, body) {
         body = JSON.parse(body);
         // forward npmjs errors
         if (!body.error) {
@@ -43,7 +43,7 @@ exports.metadata = function (req, res) {
 exports.tarball = function (req, res) {
   cache.get(req.params.tar, function (err, body) {
     if (err) {
-      request(NPM_REGISTRY + req.path, { encoding: null }, function (err, resp, body) {
+      request(REGISTRY + req.path, { encoding: null }, function (err, resp, body) {
         cache.put(req.params.tar, body);
       }).pipe(res);
     } else {

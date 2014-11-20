@@ -4,11 +4,17 @@ module.exports = function (key) {
 
   var config = {
     logo: true, // disable logo if you no like
-    proxy: 'registry.npmjs.org',
+    proxy: '',
+    registry: 'http://registry.npmjs.org',
     domain: 'http://localhost',
     port: '3000',
     db: { driver: 'level' }
   };
 
-  return process.env[key.toUpperCase()] || config[key];
+  switch (key) {
+    case 'host':
+      return config.domain + ':' + config.port;
+    default:
+      return process.env[key.toUpperCase()] || config[key];
+  }
 };
