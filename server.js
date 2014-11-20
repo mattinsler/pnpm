@@ -28,5 +28,10 @@ app.listen(config('port'), function () {
       process: process,
       config: config
     }));
+  } else {
+    console.log('\n> pnpm@' + pkg.version);
+    console.log('> host: ' + config('domain') + ':' + config('port'));
+    console.log('> pid: ' + process.pid);
+    console.log('> db: ' + config('db').driver + '\n');
   }
 });
