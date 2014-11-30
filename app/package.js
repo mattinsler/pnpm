@@ -11,7 +11,6 @@ var isScoped = function(name) {
 exports.setup = function (app) {
 
   app.get('/:pkg', function (req, res, next) {
-    console.log('GET PACKAGE', req.params.pkg);
     packages.one(req.params.pkg, function (err, pkg) {
       if (err) {
         next();
